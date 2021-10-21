@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>{{title}}</h1>
+{% for p in products %}
+    {% if loop.index  % 4 == 0  or loop.index == 1%}
+        <div class="row" style="margin-bottom: 20px;">
+    {% endif %}  
+        <div class="col-md-4">
+            <div class="card" style="padding:2%;">
+                <img style="width:300px; height:200px;" src="{{p.images[0].image_path}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">{{p.title.slice(0, 25)}}...</h5>
+                <p class="card-text">
+                    {{p.description.slice(0, 100)}}...
+                </p>
+                <a href="#" class="btn btn-primary">Read more</a>
+                </div>
+            </div>
+        </div>
+        {% if loop.index  % 3 == 0 or loop.last %}
+            </div>
+        {% endif %} 
+{% endfor %}
+{% endblock %}
