@@ -4,7 +4,7 @@ var productModel = require('../models/product')
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
-  let products = await productModel.getProducts(5);   
+  let products = await productModel.getProducts(6);   
   
   let finalProducts = products.map(async p =>{
     
