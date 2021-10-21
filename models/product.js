@@ -35,9 +35,23 @@ async function createProduct(product){
     //return rows.map((row) => { return row  });  
     
 }
+async function createProductImages(image_path, product_id){
+    // simple query
+    const [rows, _] = await promisePool.query
+    (
+        `INSERT INTO product_images
+        (image_path, product_id) 
+        VALUES(?, ?)
+        `, [image_path, product_id]
+    )
+    return JSON.parse(JSON.stringify(rows))  
+    //return rows.map((row) => { return row  });  
+    
+}
 
 module.exports = {
     getProducts: getProducts,
     getProductImages: getProductImages,
     createProduct: createProduct,
+    createProductImages: createProductImages,
 }

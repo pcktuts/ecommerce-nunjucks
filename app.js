@@ -6,8 +6,18 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var nunjucks = require('nunjucks');
 var multer = require('multer');
-var upload = multer();
+//var upload = multer();
+var path = require('path')
 
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/images/products')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
+  }
+})
+const upload = multer({ storage: storage })//multer({ dest: 'public/images/products' })
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -35,7 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // for parsing multipart/form-data
-app.use(upload.array()); 
+app.use(upload.array('product_images', 12)); 
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

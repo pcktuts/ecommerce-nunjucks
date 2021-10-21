@@ -22,9 +22,16 @@
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Category</label>
-                <input type="number" name="category_id" class="form-control">
+                <select name="category_id" class="form-control">
+                    {% for c in categories %}
+                    <option value="{{ c.id }}">{{c.title}}</option>
+                    {% endfor %}
+                </select>
             </div>
-            
+            <div class="form-group">
+                <label for="files">Select images:</label>
+                <input type="file" id="files" name="product_images" multiple>
+            </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
     </div>
