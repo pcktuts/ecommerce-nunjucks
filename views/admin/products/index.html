@@ -1,0 +1,33 @@
+{% extends "admin/admin.layout.html" %}
+{% block content %}
+    <h1>Products</h1>  
+    <a href="/admin/products/create">Create Product</a> 
+            <table class="table table-responsive">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for p in products %}
+                        <tr>
+                            <th scope="row">{{ loop.index }}</th>
+                            <td>{{p.title}}</td>
+                            <td>{{p.description.slice(0, 25)}}...</td>
+                            <td>{{p.price}}</td>
+                            <td>{{p.quantity}}</td>
+                            <td>
+                                <i class="bi bi-eye"></i>
+                                <i class="bi bi-pencil-square"></i>
+                                <i class="bi bi-trash-fill"></i>
+                            </td>
+                        </tr>   
+                    {% endfor %}              
+                </tbody>
+              </table>
+{% endblock %}

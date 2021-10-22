@@ -6,7 +6,9 @@
         <form action="/admin/products/create" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="exampleInputEmail1">Title</label>
-                <input type="text" name="title" value="{{form.title}}" class="form-control {% if errorBag.title.length > 0%} is-invalid {% endif %}" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="text" name="title" 
+                value="{% if form.title %}{{form.title}}{% endif %}" 
+                class="form-control {% if errorBag.title.length > 0%} is-invalid {% endif %}" id="exampleInputEmail1" aria-describedby="emailHelp">
                 {% for e in errorBag.title %}
                 <div class="invalid-feedback">
                     {{e.message}}
@@ -15,9 +17,7 @@
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Description</label>
-                <textarea name="description"  class="form-control {% if errorBag.description.length > 0%} is-invalid {% endif %}" >
-                    {{form.description}}
-                </textarea>
+                <textarea name="description"  class="form-control {% if errorBag.description.length > 0%} is-invalid {% endif %}">{% if form.description %}{{form.description}}{% else %}{% endif %}</textarea>
                 {% for e in errorBag.description %}
                 <div class="invalid-feedback">
                     {{e.message}}
@@ -26,11 +26,21 @@
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Price</label>
-                <input type="number" name="price"  value="{{form.price}}" class="form-control">
+                <input type="text" name="price"  value="{{form.price}}" class="form-control {% if errorBag.price.length > 0%} is-invalid {% endif %}">
+                {% for e in errorBag.price %}
+                <div class="invalid-feedback">
+                    {{e.message}}
+                </div>
+                {% endfor %}
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Quantity</label>
-                <input type="number" name="quantity" value="{{form.quantity}}" class="form-control">
+                <input type="text" name="quantity" value="{{form.quantity}}" class="form-control {% if errorBag.quantity.length > 0%} is-invalid {% endif %}">
+                {% for e in errorBag.quantity %}
+                <div class="invalid-feedback">
+                    {{e.message}}
+                </div>
+                {% endfor %}
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Category</label>
