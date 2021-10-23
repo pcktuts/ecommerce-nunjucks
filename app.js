@@ -70,6 +70,11 @@ app.use(function(req, res, next) {
   res.locals.currentUser = req.session.currentUser || null;
   console.log("inside=====")
   console.log(res.locals.currentUser)
+  if(req.path.includes("/admin/") && res.locals.currentUser == null && req.path != '/admin/login')
+  {
+    //prevent unauthorized admin access.
+    return res.redirect("/admin/login")
+  }
   next();
 });
 
