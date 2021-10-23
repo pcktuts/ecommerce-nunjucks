@@ -29,14 +29,21 @@
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        {% if currentUser %}
+          <li class="current-user nav-item dropdown">
+            <a class="current-first nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Welcome  {{currentUser.firstName}}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="/admin/logout">Logout</a>
+              
+            </div>
+          </li>
+        {% endif %}
       </div>
     </nav>
     <div class="container">
-        
+       
       {% block content %}{% endblock %}
             
       

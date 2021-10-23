@@ -26,6 +26,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var customersRouter = require('./routes/customers');
 var adminProductRouter = require('./routes/admin/product');
+var adminIndexRouter = require('./routes/admin/index');
 
 
 
@@ -65,13 +66,21 @@ app.use(
 
 // apply express-flash-message middleware
 app.use(flash({ sessionKeyName: 'flashMessage' }));
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.session.currentUser || null;
+  console.log("inside=====")
+  console.log(res.locals.currentUser)
+  next();
+});
+
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/customers', customersRouter);
 const adminPath = '/admin'
+app.use(adminPath +'/', adminIndexRouter);
 app.use(adminPath + '/products', adminProductRouter);
-
 
 
 
