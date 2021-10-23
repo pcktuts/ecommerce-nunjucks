@@ -15,5 +15,7 @@ Copy `.env.sample.js` to `.env.js` and fill up the db information
 ```
 
 Admin login
+
 user: admin@test.com
+
 password: admin123
