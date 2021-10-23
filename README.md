@@ -4,7 +4,8 @@
 ```bash
 npm i
 ```
-2. Correct db information
+2. Export the Db sql file inside the `db` folder into your mysql database.
+3. Correct db information
 
 Copy `.env.sample.js` to `.env.js` and fill up the db information
 
