@@ -8,8 +8,10 @@ const validator = require('../../validations/validator')
 
 router.get('/', async function(req, res, next) {
     const products = await productModel.getProducts(10)
+    // Get an array of flash message by passing the key to req.consumeFlash()
+    const success = await req.consumeFlash('success');
     
-    res.render("admin/products/index.html", {products: products})
+    res.render("admin/products/index.html", {products: products, success: success})
 });
 
 router.get('/create', async function(req, res, next) {
@@ -100,7 +102,9 @@ router.post('/create', async function(req, res, next) {
             await productModel.createProductImages(e.path.substring(6), productCreated.insertId);  
         })
     }
-    res.render("admin/products/create.html")
+    await req.flash('success', 'Product created successfully');
+    //res.render("admin/products/create.html")
+    res.redirect('/admin/products');
 });
 
 

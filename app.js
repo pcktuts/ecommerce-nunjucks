@@ -8,6 +8,9 @@ var nunjucks = require('nunjucks');
 var multer = require('multer');
 //var upload = multer();
 var path = require('path')
+const session = require('express-session');
+const { flash } = require('express-flash-message');
+
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -46,6 +49,22 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // for parsing multipart/form-data
 app.use(upload.array('product_images', 12)); 
+
+// express-session
+app.use(
+  session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+      // secure: true, // becareful set this option, check here: https://www.npmjs.com/package/express-session#cookiesecure. In local, if you set this to true, you won't receive flash as you are using `http` in local, but http is not secure
+    },
+  })
+);
+
+// apply express-flash-message middleware
+app.use(flash({ sessionKeyName: 'flashMessage' }));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

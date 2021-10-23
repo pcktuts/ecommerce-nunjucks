@@ -1,6 +1,11 @@
 {% extends "admin/admin.layout.html" %}
 {% block content %}
-    <h1>Products</h1>  
+    <h1>Products</h1>      
+      {% for msg in success %}
+      <div class="alert alert-success" role="alert">
+        {{ msg }}
+      </div>
+      {% endfor %}   
     <a href="/admin/products/create">Create Product</a> 
             <table class="table table-responsive">
                 <thead class="thead-dark">
